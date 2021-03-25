@@ -28,12 +28,16 @@
     $('#auth_submit').click(function() {
         var accId = $('#accId').val();
         var apiKey = $('#apiKey').val();
+        var pw = $('#pw').val();
+        var secret = $('#secret').val();
 
         var url = "{{url('home/auth')}}";
         var type = 'POST';
         var data = {
             accId: accId,
-            apiKey: apiKey
+            apiKey: apiKey,
+            pw: pw,
+            secret: secret
         };
         ajaxCall(url, data, type);
     });

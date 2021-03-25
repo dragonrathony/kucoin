@@ -19,6 +19,8 @@ class HomeController extends Controller
         if ($request->ajax()) {
             $acc_id = $request->data['accId'];
             $api_key = $request->data['apiKey'];
+            $pw = $request->data['pw'];
+            $secret = $request->data['secret'];
             // dd($api_key);
 
             return response()->json([

@@ -61,7 +61,7 @@
                     <!-- <form> -->
                     @csrf
                     <div class="form-group row">
-                        <label for="accId" class="col-sm-4 col-form-label">Acc ID</label>
+                        <label for="accId" class="col-sm-4 col-form-label">UID</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="accId">
                         </div>
@@ -70,6 +70,18 @@
                         <label for="apiKey" class="col-sm-4 col-form-label">API Key</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="apiKey">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="secret" class="col-sm-4 col-form-label">Secret Key</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="secret">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="pw" class="col-sm-4 col-form-label">PW</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="pw">
                         </div>
                     </div>
                     <div class="form-group row">
