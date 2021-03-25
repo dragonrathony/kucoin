@@ -1,6 +1,9 @@
 <script>
     var _token = $("input[name=_token]").val();
-    console.log('home js...', _token);
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true
+    }
 
 
     function ajaxCall(url, data, type = 'POST') {
@@ -16,6 +19,7 @@
             success: function(res) {
                 console.log('ajax result...', res);
                 $.LoadingOverlay("hide");
+                toastr.success(res.msg);
             }
         });
     }
