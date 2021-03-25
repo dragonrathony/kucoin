@@ -5,6 +5,7 @@
 
     function ajaxCall(url, data, type = 'POST') {
         console.log('ajax call...', url, data, type);
+        $.LoadingOverlay("show");
         $.ajax({
             url: url,
             method: type,
@@ -14,6 +15,7 @@
             },
             success: function(res) {
                 console.log('ajax result...', res);
+                $.LoadingOverlay("hide");
             }
         });
     }
