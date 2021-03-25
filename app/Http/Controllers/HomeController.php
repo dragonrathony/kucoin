@@ -11,4 +11,21 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
+    // authentication
+    public function auth(Request $request)
+    {
+        if ($request->ajax()) {
+            $acc_id = $request->data['accId'];
+            $api_key = $request->data['apiKey'];
+            // dd($api_key);
+
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Authentication successfully',
+                'data' => []
+            ]);
+        }
+    }
 }

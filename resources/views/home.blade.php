@@ -58,25 +58,26 @@
             <div class="card my-4">
                 <h5 class="card-header text-center">Authentication</h5>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group row">
-                            <label for="accId" class="col-sm-4 col-form-label">Acc ID</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="accId">
-                            </div>
+                    <!-- <form> -->
+                    @csrf
+                    <div class="form-group row">
+                        <label for="accId" class="col-sm-4 col-form-label">Acc ID</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="accId">
                         </div>
-                        <div class="form-group row">
-                            <label for="apiKey" class="col-sm-4 col-form-label">API Key</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="apiKey">
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="apiKey" class="col-sm-4 col-form-label">API Key</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="apiKey">
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 text-center">
-                                <button type="submit" class="btn btn-secondary">Submit</button>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-center">
+                            <button type="button" id="auth_submit" class="btn btn-secondary">Submit</button>
                         </div>
-                    </form>
+                    </div>
+                    <!-- </form> -->
                 </div>
             </div>
 
@@ -161,5 +162,7 @@
 @endsection
 
 @section('script')
+
+@include('scripts.home-js')
 
 @endsection
