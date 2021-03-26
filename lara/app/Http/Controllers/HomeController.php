@@ -12,6 +12,7 @@ class HomeController extends Controller
         $this->key = '';
         $this->secret = '';
         $this->passphrase = '';
+        $this->base_url = 'https://api.kucoin.com';
     }
     // home page
     public function index()
@@ -71,8 +72,8 @@ class HomeController extends Controller
             $this->passphrase = $request->data['pw'];
             $this->secret = $request->data['secret'];
 
-            $url = 'https://api.kucoin.com/api/v1/accounts';
             $request_path = '/api/v1/accounts';
+            $url = $this->base_url . $request_path;
 
             $response = $this->callAPI($url, $request_path, 'GET', '');
 
@@ -82,10 +83,52 @@ class HomeController extends Controller
                     'data' => $response
                 ]);
             } else {
-                return response()->json([
-                    'status' => 'success',
-                    'data' => $response
-                ]);
+                // get current price
+                $current_price = 0;
+
+                $symbol = 'THETA-USDT';
+                $request_path = "/api/v1/market/orderbook/level1?symbol={$symbol}";
+                $url = $this->base_url . $request_path;
+                $current_price_result = $this->callAPI($url, $request_path, 'GET', '');
+                if ($current_price_result['error']) {
+                    return response()->json([
+                        'status' => 'error',
+                        'data' => $current_price
+                    ]);
+                } else {
+                    $current_price = $current_price_result['result']->data->price;
+
+                    // get margin account
+                    $request_path = "/api/v1/margin/account";
+                    $url = $this->base_url . $request_path;
+                    $margin_result = $this->callAPI($url, $request_path, 'GET', '');
+                    if ($margin_result['error']) {
+                        return response()->json([
+                            'status' => 'error',
+                            'data' => $margin_result
+                        ]);
+                    } else {
+                        // dd($margin_result);
+                        $debtRatio = $margin_result['result']->data->debtRatio;
+                        $theta = $margin_result['result']->data->accounts[0];
+                        $usdt = $margin_result['result']->data->accounts[1];
+
+                        $theta_total = $theta->totalBalance;
+                        $usdt_total = $usdt->totalBalance;
+                        $usdt_liability = $usdt->liability;
+
+                        $data['current_price'] = $current_price;
+                        $data['debtRatio'] = $debtRatio;
+                        $data['theta_total'] = $theta_total;
+                        $data['usdt_liability'] = $usdt_liability;
+                        $data['usdt_total'] = $usdt_total;
+
+                        return response()->json([
+                            'status' => 'success',
+                            'data' => $data
+                        ]);
+                    }
+                }
             }
         }
     }

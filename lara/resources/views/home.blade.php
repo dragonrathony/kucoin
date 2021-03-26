@@ -162,18 +162,31 @@
 
                             <div class="mb-2">
                                 Margin Account
-                                <div class="d-flex  justify-content-around">
-                                    <div>THETA</div>
+                                <div class="d-flex  justify-content-around text-success">
+                                    <div>THETA:</div>
                                     <div>
-                                        <span class="currency">$&nbsp;</span>
-                                        <span id="margin_theta">0.00</span>
+                                        <div>
+                                            <span class="currency">$&nbsp;</span>
+                                            <span id="margin_theta_total">0.00</span>
+                                        </div>
+                                        <div>
+                                            <span id="margin_debt_ratio">0.00</span>
+                                            <span class="currency">%</span>
+                                        </div>
                                     </div>
+
                                 </div>
-                                <div class="d-flex  justify-content-around">
-                                    <div>USDT</div>
+                                <div class="d-flex  justify-content-around text-success">
+                                    <div>USDT:</div>
                                     <div>
-                                        <span class="currency">$&nbsp;</span>
-                                        <span id="margin_usdt">0.00</span>
+                                        <div>
+                                            <span class="currency">$&nbsp;</span>
+                                            <span id="margin_usdt_total">0.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="currency">$&nbsp;</span>
+                                            <span id="margin_usdt_liability">0.00</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

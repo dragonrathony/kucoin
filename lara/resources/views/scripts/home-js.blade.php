@@ -18,14 +18,15 @@
             success: function(res) {
                 console.log('ajax result...', res);
                 $.LoadingOverlay("hide");
-                if (res.data) {
-                    let result = res.data.result;
-                    if (result.code === "200000") {
-                        toastr.success('Authenticated successfully');
-                        showData2Blocks(result.data);
-                    } else {
-                        toastr.error(result.msg);
-                    }
+                if (res.status === "success") {
+                    toastr.success('Authenticated successfully');
+                    showData2Blocks(res.data);
+                    // if (result.code === "200000") {
+                    //     toastr.success('Authenticated successfully');
+                    //     showData2Blocks(result.data);
+                    // } else {
+                    //     toastr.error(result.msg);
+                    // }
                 } else {
                     toastr.error('Server error');
                 }
@@ -37,57 +38,16 @@
     // display data to two blocks
     function showData2Blocks(data) {
         console.log('show block data...', data);
-        let main = {},
-            trade = {},
-            margin = {}
-        theta_usdt = 0;
 
-        data.map(function(item) {
-            if (item.type === "main") {
-                if (item.currency === "THETA") {
-                    main.theta = parseFloat(item.balance);
-                    theta_usdt += parseFloat(item.balance);
-                }
-                if (item.currency === "USDT") {
-                    main.usdt = parseFloat(item.balance);
-                    theta_usdt += parseFloat(item.balance);
-                }
-            }
-
-            if (item.type === "trade") {
-                if (item.currency === "THETA") {
-                    trade.theta = parseFloat(item.balance);
-                    theta_usdt += parseFloat(item.balance);
-                }
-                if (item.currency === "USDT") {
-                    trade.usdt = parseFloat(item.balance);
-                    theta_usdt += parseFloat(item.balance);
-                }
-            }
-
-            if (item.type === "margin") {
-                if (item.currency === "THETA") {
-                    margin.theta = parseFloat(item.balance);
-                    theta_usdt += parseFloat(item.balance);
-                }
-                if (item.currency === "USDT") {
-                    margin.theta = parseFloat(item.balance);
-                    // margin.theta = parseFloat(item.balance).toFixed(2);
-                    theta_usdt += parseFloat(item.balance);
-                }
-            }
-        });
-
-        theta_usdt = theta_usdt.toFixed(2);
-        console.log('data...', main, trade, margin, theta_usdt);
-
-        $('#current_price').text(theta_usdt);
-        $('#main_theta').text(main.theta);
-        $('#main_usdt').text(main.usdt);
-        $('#trade_theta').text(trade.theta);
-        $('#trade_usdt').text(trade.usdt);
-        $('#margin_theta').text(margin.theta);
-        $('#margin_usdt').text(margin.usdt);
+        $('#current_price').text(data.current_price);
+        // $('#main_theta').text(data.current_price);
+        // $('#main_usdt').text(data.current_price);
+        // $('#trade_theta').text(data.current_price);
+        // $('#trade_usdt').text(data.current_price);
+        $('#margin_theta_total').text(data.theta_total);
+        $('#margin_debt_ratio').text((parseFloat(data.debtRatio) * 100).toFixed(2));
+        $('#margin_usdt_total').text(data.usdt_total);
+        $('#margin_usdt_liability').text(data.usdt_liability);
     }
 
 
