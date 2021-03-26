@@ -21,14 +21,8 @@
                 if (res.status === "success") {
                     toastr.success('Authenticated successfully');
                     showData2Blocks(res.data);
-                    // if (result.code === "200000") {
-                    //     toastr.success('Authenticated successfully');
-                    //     showData2Blocks(result.data);
-                    // } else {
-                    //     toastr.error(result.msg);
-                    // }
                 } else {
-                    toastr.error('Server error');
+                    toastr.error(res.data);
                 }
             }
         });
@@ -40,8 +34,8 @@
         console.log('show block data...', data);
 
         $('#current_price').text(data.current_price);
-        // $('#main_theta').text(data.current_price);
-        // $('#main_usdt').text(data.current_price);
+        $('#main_theta').text(data.main_theta);
+        $('#main_usdt').text(data.main_usdt);
         // $('#trade_theta').text(data.current_price);
         // $('#trade_usdt').text(data.current_price);
         $('#margin_theta_total').text(data.theta_total);

@@ -83,51 +83,75 @@ class HomeController extends Controller
                     'data' => $response
                 ]);
             } else {
-                // get current price
-                $current_price = 0;
+                if ($response['result']->code === "200000") {
+                    // get main account
+                    $main_theta = '';
+                    $main_usdt = '';
+                    $auth_res_data = $response['result']->data;
+                    foreach ($auth_res_data as $item) {
+                        if ($item->type === 'main') {
+                            if ($item->type === 'main' && $item->currency === "THETA") {
+                                $main_theta = $item->balance;
+                            }
+                            if ($item->currency === "USDT") {
+                                $main_usdt = $item->balance;
+                            }
+                        }
+                    }
 
-                $symbol = 'THETA-USDT';
-                $request_path = "/api/v1/market/orderbook/level1?symbol={$symbol}";
-                $url = $this->base_url . $request_path;
-                $current_price_result = $this->callAPI($url, $request_path, 'GET', '');
-                if ($current_price_result['error']) {
-                    return response()->json([
-                        'status' => 'error',
-                        'data' => $current_price
-                    ]);
-                } else {
-                    $current_price = $current_price_result['result']->data->price;
 
-                    // get margin account
-                    $request_path = "/api/v1/margin/account";
+                    // get current price
+                    $current_price = 0;
+                    $symbol = 'THETA-USDT';
+                    $request_path = "/api/v1/market/orderbook/level1?symbol={$symbol}";
                     $url = $this->base_url . $request_path;
-                    $margin_result = $this->callAPI($url, $request_path, 'GET', '');
-                    if ($margin_result['error']) {
+                    $current_price_result = $this->callAPI($url, $request_path, 'GET', '');
+                    if ($current_price_result['error']) {
                         return response()->json([
                             'status' => 'error',
-                            'data' => $margin_result
+                            'data' => 'Current price error'
                         ]);
                     } else {
-                        // dd($margin_result);
-                        $debtRatio = $margin_result['result']->data->debtRatio;
-                        $theta = $margin_result['result']->data->accounts[0];
-                        $usdt = $margin_result['result']->data->accounts[1];
+                        $current_price = $current_price_result['result']->data->price;
 
-                        $theta_total = $theta->totalBalance;
-                        $usdt_total = $usdt->totalBalance;
-                        $usdt_liability = $usdt->liability;
 
-                        $data['current_price'] = $current_price;
-                        $data['debtRatio'] = $debtRatio;
-                        $data['theta_total'] = $theta_total;
-                        $data['usdt_liability'] = $usdt_liability;
-                        $data['usdt_total'] = $usdt_total;
+                        // get margin account
+                        $request_path = "/api/v1/margin/account";
+                        $url = $this->base_url . $request_path;
+                        $margin_result = $this->callAPI($url, $request_path, 'GET', '');
+                        if ($margin_result['error']) {
+                            return response()->json([
+                                'status' => 'error',
+                                'data' => 'Margin account error'
+                            ]);
+                        } else {
+                            $debtRatio = $margin_result['result']->data->debtRatio;
+                            $theta = $margin_result['result']->data->accounts[0];
+                            $usdt = $margin_result['result']->data->accounts[1];
 
-                        return response()->json([
-                            'status' => 'success',
-                            'data' => $data
-                        ]);
+                            $theta_total = $theta->totalBalance;
+                            $usdt_total = $usdt->totalBalance;
+                            $usdt_liability = $usdt->liability;
+
+                            $data['current_price'] = $current_price;
+                            $data['main_theta'] = $main_theta;
+                            $data['main_usdt'] = $main_usdt;
+                            $data['debtRatio'] = $debtRatio;
+                            $data['theta_total'] = $theta_total;
+                            $data['usdt_liability'] = $usdt_liability;
+                            $data['usdt_total'] = $usdt_total;
+
+                            return response()->json([
+                                'status' => 'success',
+                                'data' => $data
+                            ]);
+                        }
                     }
+                } else {
+                    return response()->json([
+                        'status' => 'error',
+                        'data' => 'Authentication failed'
+                    ]);
                 }
             }
         }

@@ -109,7 +109,7 @@
                                 <b>Current Price</b>
                             </div>
                             <div>
-                                <span class="currency">$&nbsp;</span>
+                                <span class="currency">$</span>
                                 <span id="current_price">0.00</span>
                             </div>
                         </div>
@@ -129,14 +129,14 @@
                                 <div class="d-flex  justify-content-around">
                                     <div>THETA</div>
                                     <div>
-                                        <span class="currency">$&nbsp;</span>
+                                        <span class="currency">$</span>
                                         <span id="main_theta">0.00</span>
                                     </div>
                                 </div>
                                 <div class="d-flex  justify-content-around">
                                     <div>USDT</div>
                                     <div>
-                                        <span class="currency">$&nbsp;</span>
+                                        <span class="currency">$</span>
                                         <span id="main_usdt">0.00</span>
                                     </div>
                                 </div>
@@ -147,14 +147,14 @@
                                 <div class="d-flex  justify-content-around">
                                     <div>THETA</div>
                                     <div>
-                                        <span class="currency">$&nbsp;</span>
+                                        <span class="currency">$</span>
                                         <span id="trade_theta">0.00</span>
                                     </div>
                                 </div>
                                 <div class="d-flex  justify-content-around">
                                     <div>USDT</div>
                                     <div>
-                                        <span class="currency">$&nbsp;</span>
+                                        <span class="currency">$</span>
                                         <span id="trade_usdt">0.00</span>
                                     </div>
                                 </div>
@@ -162,11 +162,11 @@
 
                             <div class="mb-2">
                                 Margin Account
-                                <div class="d-flex  justify-content-around text-success">
+                                <div class="d-flex  justify-content-around">
                                     <div>THETA:</div>
                                     <div>
                                         <div>
-                                            <span class="currency">$&nbsp;</span>
+                                            <span class="currency">$</span>
                                             <span id="margin_theta_total">0.00</span>
                                         </div>
                                         <div>
@@ -176,15 +176,15 @@
                                     </div>
 
                                 </div>
-                                <div class="d-flex  justify-content-around text-success">
+                                <div class="d-flex  justify-content-around">
                                     <div>USDT:</div>
                                     <div>
                                         <div>
-                                            <span class="currency">$&nbsp;</span>
+                                            <span class="currency">$</span>
                                             <span id="margin_usdt_total">0.00</span>
                                         </div>
                                         <div>
-                                            <span class="currency">$&nbsp;</span>
+                                            <span class="currency">$</span>
                                             <span id="margin_usdt_liability">0.00</span>
                                         </div>
                                     </div>
