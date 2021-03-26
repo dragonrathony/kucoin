@@ -108,7 +108,10 @@
                             <div class="mb-2">
                                 <b>Current Price</b>
                             </div>
-                            <div>$ X.XX</div>
+                            <div>
+                                <span class="currency">$&nbsp;</span>
+                                <span id="current_price">0.00</span>
+                            </div>
                         </div>
                     </div>
 
@@ -125,11 +128,17 @@
                                 Main Account
                                 <div class="d-flex  justify-content-around">
                                     <div>THETA</div>
-                                    <div>$ X.XX</div>
+                                    <div>
+                                        <span class="currency">$&nbsp;</span>
+                                        <span id="main_theta">0.00</span>
+                                    </div>
                                 </div>
                                 <div class="d-flex  justify-content-around">
                                     <div>USDT</div>
-                                    <div>$ X.XX</div>
+                                    <div>
+                                        <span class="currency">$&nbsp;</span>
+                                        <span id="main_usdt">0.00</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -137,11 +146,17 @@
                                 Trading Account
                                 <div class="d-flex  justify-content-around">
                                     <div>THETA</div>
-                                    <div>$ X.XX</div>
+                                    <div>
+                                        <span class="currency">$&nbsp;</span>
+                                        <span id="trade_theta">0.00</span>
+                                    </div>
                                 </div>
                                 <div class="d-flex  justify-content-around">
                                     <div>USDT</div>
-                                    <div>$ X.XX</div>
+                                    <div>
+                                        <span class="currency">$&nbsp;</span>
+                                        <span id="trade_usdt">0.00</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -149,11 +164,17 @@
                                 Margin Account
                                 <div class="d-flex  justify-content-around">
                                     <div>THETA</div>
-                                    <div>$ X.XX</div>
+                                    <div>
+                                        <span class="currency">$&nbsp;</span>
+                                        <span id="margin_theta">0.00</span>
+                                    </div>
                                 </div>
                                 <div class="d-flex  justify-content-around">
                                     <div>USDT</div>
-                                    <div>$ X.XX</div>
+                                    <div>
+                                        <span class="currency">$&nbsp;</span>
+                                        <span id="margin_usdt">0.00</span>
+                                    </div>
                                 </div>
                             </div>
 
