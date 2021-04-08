@@ -230,6 +230,16 @@
                         <li class="nav-item"
                             role="presentation">
                             <a class="nav-link active sub-nav-link"
+                                id="spot-limit-tab"
+                                data-toggle="tab"
+                                href="#spot-limit-tabs"
+                                role="tab"
+                                aria-controls="spot-limit-tabs"
+                                aria-selected="true">Limit</a>
+                        </li>
+                        <li class="nav-item"
+                            role="presentation">
+                            <a class="nav-link sub-nav-link"
                                 id="spot-market-tab"
                                 data-toggle="tab"
                                 href="#spot-market-tabs"
@@ -240,11 +250,11 @@
                         <li class="nav-item"
                             role="presentation">
                             <a class="nav-link sub-nav-link"
-                                id="spot-limit-tab"
+                                id="spot-slimit-tab"
                                 data-toggle="tab"
-                                href="#spot-limit-tabs"
+                                href="#spot-slimit-tabs"
                                 role="tab"
-                                aria-controls="spot-limit-tabs"
+                                aria-controls="spot-slimit-tabs"
                                 aria-selected="false">Stop Limit</a>
                         </li>
                         <li class="nav-item"
@@ -263,30 +273,119 @@
                     <!-- Sub tab content -->
                     <div class="tab-content"
                         id="ex1-content">
-                        <div class="tab-pane fade show active p-2 pl-4"
-                            id="spot-market-tabs"
-                            role="tabpanel"
-                            aria-labelledby="spot-market-tab">
-                            <input type="number"
-                                class="form-control w-25 mb-3"
-                                id="spot-market-price"
-                                placeholder="Price">
-                            <input type="number"
-                                class="form-control w-25"
-                                id="spot-market-amount"
-                                placeholder="Amount">
-                        </div>
-                        <div class="tab-pane fade"
+                        <div class="tab-pane fade active show p-2 pl-4"
                             id="spot-limit-tabs"
                             role="tabpanel"
                             aria-labelledby="spot-limit-tab">
-                            spot 2 content
+                            <div class="d-flex"><input type="number"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    id="spot-limit-buy-price"
+                                    placeholder="Price">
+                                <input type="number"
+                                    class="form-control w-25 mb-3"
+                                    id="spot-limit-sell-price"
+                                    placeholder="Price">
+                            </div>
+                            <div class="d-flex">
+                                <input type="number"
+                                    class="form-control w-25 mr-5"
+                                    id="spot-limit-buy-amount"
+                                    placeholder="Amount">
+                                <input type="number"
+                                    class="form-control w-25"
+                                    id="spot-limit-sell-amount"
+                                    placeholder="Amount">
+                            </div>
                         </div>
-                        <div class="tab-pane fade"
+                        <div class="tab-pane fade p-2 pl-4"
+                            id="spot-market-tabs"
+                            role="tabpanel"
+                            aria-labelledby="spot-market-tab">
+                            <div class="d-flex"><input type="text"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    placeholder="Best Market Price"
+                                    disabled>
+                                <input type="text"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    placeholder="Best Market Price"
+                                    disabled>
+                            </div>
+                            <div class="d-flex">
+                                <input type="number"
+                                    class="form-control w-25 mr-5"
+                                    id="spot-market-buy-amount"
+                                    placeholder="Amount">
+                                <input type="number"
+                                    class="form-control w-25"
+                                    id="spot-market-sell-amount"
+                                    placeholder="Amount">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade p-2 pl-4"
+                            id="spot-slimit-tabs"
+                            role="tabpanel"
+                            aria-labelledby="spot-slimit-tab">
+                            <div class="d-flex"><input type="number"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    id="spot-slimit-buy-sprice"
+                                    placeholder="Stop Price">
+                                <input type="number"
+                                    class="form-control w-25 mb-3"
+                                    id="spot-slimit-sell-sprice"
+                                    placeholder="Stop Price">
+                            </div>
+                            <div class="d-flex"><input type="number"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    id="spot-slimit-buy-price"
+                                    placeholder="Price">
+                                <input type="number"
+                                    class="form-control w-25 mb-3"
+                                    id="spot-slimit-sell-price"
+                                    placeholder="Price">
+                            </div>
+                            <div class="d-flex">
+                                <input type="number"
+                                    class="form-control w-25 mr-5"
+                                    id="spot-slimit-buy-amount"
+                                    placeholder="Amount">
+                                <input type="number"
+                                    class="form-control w-25"
+                                    id="spot-slimit-sell-amount"
+                                    placeholder="Amount">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade p-2 pl-4"
                             id="spot-smarket-tabs"
                             role="tabpanel"
                             aria-labelledby="spot-smarket-tab">
-                            spot 3 content
+                            <div class="d-flex"><input type="number"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    id="spot-smarket-buy-sprice"
+                                    placeholder="Stop Price">
+                                <input type="number"
+                                    class="form-control w-25 mb-3"
+                                    id="spot-smarket-sell-sprice"
+                                    placeholder="Stop Price">
+                            </div>
+                            <div class="d-flex"><input type="text"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    placeholder="Best Market Price"
+                                    disabled>
+                                <input type="text"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    placeholder="Best Market Price"
+                                    disabled>
+                            </div>
+                            <div class="d-flex">
+                                <input type="number"
+                                    class="form-control w-25 mr-5"
+                                    id="spot-smarket-buy-amount"
+                                    placeholder="Amount">
+                                <input type="number"
+                                    class="form-control w-25"
+                                    id="spot-smarket-sell-amount"
+                                    placeholder="Amount">
+                            </div>
                         </div>
                     </div>
                     <!-- Sub tab content -->
@@ -303,6 +402,16 @@
                         <li class="nav-item"
                             role="presentation">
                             <a class="nav-link active sub-nav-link"
+                                id="margin-limit-tab"
+                                data-toggle="tab"
+                                href="#margin-slimit-tabs"
+                                role="tab"
+                                aria-controls="margin-slimit-tabs"
+                                aria-selected="true">Limit</a>
+                        </li>
+                        <li class="nav-item"
+                            role="presentation">
+                            <a class="nav-link sub-nav-link"
                                 id="margin-market-tab"
                                 data-toggle="tab"
                                 href="#margin-market-tabs"
@@ -315,9 +424,9 @@
                             <a class="nav-link sub-nav-link"
                                 id="margin-limit-tab"
                                 data-toggle="tab"
-                                href="#margin-limit-tabs"
+                                href="#margin-slimit-tabs"
                                 role="tab"
-                                aria-controls="margin-limit-tabs"
+                                aria-controls="margin-slimit-tabs"
                                 aria-selected="false">Stop Limit</a>
                         </li>
                         <li class="nav-item"
@@ -336,23 +445,119 @@
                     <!-- Sub tab content -->
                     <div class="tab-content"
                         id="ex1-content">
-                        <div class="tab-pane fade show active"
-                            id="margin-market-tabs"
-                            role="tabpanel"
-                            aria-labelledby="margin-market-tab">
-                            margin 1 content
-                        </div>
-                        <div class="tab-pane fade"
+                        <div class="tab-pane fade show active p-2 pl-4"
                             id="margin-limit-tabs"
                             role="tabpanel"
                             aria-labelledby="margin-limit-tab">
-                            margin 2 content
+                            <div class="d-flex"><input type="number"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    id="margin-limit-buy-price"
+                                    placeholder="Price">
+                                <input type="number"
+                                    class="form-control w-25 mb-3"
+                                    id="margin-limit-sell-price"
+                                    placeholder="Price">
+                            </div>
+                            <div class="d-flex">
+                                <input type="number"
+                                    class="form-control w-25 mr-5"
+                                    id="margin-limit-buy-amount"
+                                    placeholder="Amount">
+                                <input type="number"
+                                    class="form-control w-25"
+                                    id="margin-limit-sell-amount"
+                                    placeholder="Amount">
+                            </div>
                         </div>
-                        <div class="tab-pane fade"
+                        <div class="tab-pane fade p-2 pl-4"
+                            id="margin-market-tabs"
+                            role="tabpanel"
+                            aria-labelledby="margin-market-tab">
+                            <div class="d-flex"><input type="text"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    placeholder="Best Market Price"
+                                    disabled>
+                                <input type="text"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    placeholder="Best Market Price"
+                                    disabled>
+                            </div>
+                            <div class="d-flex">
+                                <input type="number"
+                                    class="form-control w-25 mr-5"
+                                    id="margin-market-buy-amount"
+                                    placeholder="Amount">
+                                <input type="number"
+                                    class="form-control w-25"
+                                    id="margin-market-sell-amount"
+                                    placeholder="Amount">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade p-2 pl-4"
+                            id="margin-slimit-tabs"
+                            role="tabpanel"
+                            aria-labelledby="margin-limit-tab">
+                            <div class="d-flex"><input type="number"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    id="margin-slimit-buy-sprice"
+                                    placeholder="Stop Price">
+                                <input type="number"
+                                    class="form-control w-25 mb-3"
+                                    id="margin-slimit-sell-sprice"
+                                    placeholder="Stop Price">
+                            </div>
+                            <div class="d-flex"><input type="number"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    id="margin-slimit-buy-price"
+                                    placeholder="Price">
+                                <input type="number"
+                                    class="form-control w-25 mb-3"
+                                    id="margin-slimit-sell-price"
+                                    placeholder="Price">
+                            </div>
+                            <div class="d-flex">
+                                <input type="number"
+                                    class="form-control w-25 mr-5"
+                                    id="margin-slimit-buy-amount"
+                                    placeholder="Amount">
+                                <input type="number"
+                                    class="form-control w-25"
+                                    id="margin-slimit-sell-amount"
+                                    placeholder="Amount">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade p-2 pl-4"
                             id="margin-smarket-tabs"
                             role="tabpanel"
                             aria-labelledby="margin-smarket-tab">
-                            margin 3 content
+                            <div class="d-flex"><input type="number"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    id="margin-smarket-buy-sprice"
+                                    placeholder="Stop Price">
+                                <input type="number"
+                                    class="form-control w-25 mb-3"
+                                    id="margin-smarket-sell-sprice"
+                                    placeholder="Stop Price">
+                            </div>
+                            <div class="d-flex"><input type="text"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    placeholder="Best Market Price"
+                                    disabled>
+                                <input type="text"
+                                    class="form-control w-25 mr-5 mb-3"
+                                    placeholder="Best Market Price"
+                                    disabled>
+                            </div>
+                            <div class="d-flex">
+                                <input type="number"
+                                    class="form-control w-25 mr-5"
+                                    id="margin-smarket-buy-amount"
+                                    placeholder="Amount">
+                                <input type="number"
+                                    class="form-control w-25"
+                                    id="margin-smarket-sell-amount"
+                                    placeholder="Amount">
+                            </div>
                         </div>
                     </div>
                     <!-- Sub tab content -->
