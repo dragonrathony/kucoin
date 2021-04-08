@@ -1,0 +1,15 @@
+.trading-tabs {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+a.nav-link {
+    color: gray;
+}
+
+.nav-link.active {
+    color: #007bff !important;
+}
+.sub-nav-tabs, .sub-nav-link {
+    border: none !important;
+}
