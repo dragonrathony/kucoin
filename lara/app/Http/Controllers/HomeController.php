@@ -19,6 +19,7 @@ class HomeController extends Controller
             "main_usdt" => "0.00",
             "debtRatio" => "0.00",
             "theta_total" => "0.00",
+            "theta_liability" => "0.00",
             "usdt_liability" => "0.00",
             "usdt_total" => "0.00"
         ];
@@ -145,10 +146,19 @@ class HomeController extends Controller
         $margin_result = $this->authAPI($this->base_url . $margin_path, $margin_path, 'GET', '');
 
         $debtRatio = $margin_result['result']->data->debtRatio;
-        $theta = $margin_result['result']->data->accounts[0];
-        $usdt = $margin_result['result']->data->accounts[1];
+        $theta = [];
+        $usdt = [];
+        
+        for ($i = 0; $i < count($margin_result['result']->data->accounts); $i++) {
+            if ($margin_result['result']->data->accounts[$i]->currency === "THETA") {
+                $theta = $margin_result['result']->data->accounts[$i];
+            } else if ($margin_result['result']->data->accounts[$i]->currency === "USDT") {
+                $usdt = $margin_result['result']->data->accounts[$i];
+            }
+        }
 
         $theta_total = $theta->totalBalance;
+        $theta_liability = $theta->liability;
         $usdt_total = $usdt->totalBalance;
         $usdt_liability = $usdt->liability;
 
@@ -157,8 +167,9 @@ class HomeController extends Controller
         $data['main_usdt'] = $main_usdt;
         $data['debtRatio'] = $debtRatio;
         $data['theta_total'] = $theta_total;
-        $data['usdt_liability'] = $usdt_liability;
+        $data['theta_liability'] = $theta_liability;
         $data['usdt_total'] = $usdt_total;
+        $data['usdt_liability'] = $usdt_liability;
         
         return $data;
     }

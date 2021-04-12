@@ -146,33 +146,86 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 pl-0">
                                     <div class="text-center">
                                         <h6>Margin Account</h6>
-                                        <div class="d-flex  justify-content-around">
-                                            <div>THETA:</div>
-                                            <div>
-                                                <div>
+                                        <div class="justify-content-around">
+                                            <div class="d-flex">
+                                                <div>THETA:</div>
+                                                <div class="ml-auto">
                                                     <span class="currency">$</span>
-                                                    <span id="margin_theta_total">{{$values['theta_total']}}</span>
+                                                    <span id="margin_theta_total">
+                                                        @if ($session === null)
+                                                        0.00
+                                                        @else
+                                                        <?php
+                                                            if (strpos(number_format((float)$values['theta_total'], 2, '.', ''), ".00") !== false) {
+                                                                echo "< ".str_replace(".00",".01",number_format((float)$values['theta_total'], 2, '.', ''));
+                                                            } else {
+                                                                echo number_format((float)$values['theta_total'], 2, '.', '');
+                                                            }
+                                                        ?>
+                                                        @endif
+                                                    </span>
                                                 </div>
-                                                <div>
-                                                    <span id="margin_debt_ratio">{{$values['debtRatio']}}</span>
-                                                    <span class="currency">%</span>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div>LOAN AMT:</div>
+                                                <div class="ml-auto">
+                                                    <span class="currency">$</span>
+                                                    <span id="margin_theta_liability">
+                                                        @if ($session === null)
+                                                        0.00
+                                                        @else
+                                                        <?php
+                                                            if (strpos(number_format((float)$values['theta_liability'], 2, '.', ''), ".00") !== false) {
+                                                                echo "< ".str_replace(".00",".01",number_format((float)$values['theta_liability'], 2, '.', ''));
+                                                            } else {
+                                                                echo number_format((float)$values['theta_liability'], 2, '.', '');
+                                                            }
+                                                        ?>
+                                                        @endif
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex  justify-content-around">
-                                            <div>USDT:</div>
-                                            <div>
-                                                <div>
+                                        <div class="justify-content-around">
+                                            <div class="d-flex">
+                                                <div>USDT:</div>
+                                                <div class="ml-auto">
                                                     <span class="currency">$</span>
-                                                    <span id="margin_usdt_total">{{$values['usdt_total']}}</span>
+                                                    <span id="margin_usdt_total">
+                                                        @if ($session === null)
+                                                        0.00
+                                                        @else
+                                                        <?php
+                                                            if (strpos(number_format((float)$values['usdt_total'], 2, '.', ''), ".00") !== false) {
+                                                                echo "< ".str_replace(".00",".01",number_format((float)$values['usdt_total'], 2, '.', ''));
+                                                            } else {
+                                                                echo number_format((float)$values['usdt_total'], 2, '.', '');
+                                                            }
+                                                        ?>
+                                                        @endif
+                                                    </span>
                                                 </div>
-                                                <div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div>LOAN AMT:</div>
+                                                <div class="ml-auto">
                                                     <span class="currency">$</span>
-                                                    <span
-                                                        id="margin_usdt_liability">{{$values['usdt_liability']}}</span>
+                                                    <span id="margin_usdt_liability">
+                                                        @if ($session === null)
+                                                        0.00
+                                                        @else
+                                                        <?php
+                                                            if (strpos(number_format((float)$values['usdt_liability'], 2, '.', ''), ".00") !== false) {
+                                                                echo "< ".str_replace(".00",".01",number_format((float)$values['usdt_liability'], 2, '.', ''));
+                                                            } else {
+                                                                echo number_format((float)$values['usdt_liability'], 2, '.', '');
+                                                            }
+                                                        ?>
+                                                        @endif
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,7 +243,7 @@
                                     </div>
                                     <div class="col-lg-4 d-flex mt-2">
                                         <h5 id="leverage"
-                                            class="ml-auto">0.00</h5>
+                                            class="ml-auto">{{$values['debtRatio']}}</h5>
                                         <h5 class="currency mr-auto">%</h5>
                                     </div>
                                     <div class="col-lg-4 text-center">
