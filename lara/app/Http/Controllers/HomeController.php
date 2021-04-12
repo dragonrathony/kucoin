@@ -133,13 +133,7 @@ class HomeController extends Controller
             }
         }
 
-        // get current price
-        $current_price = 0;
-        $symbol = 'THETA-USDT';
-        $request_path = "/api/v1/market/orderbook/level1?symbol={$symbol}";
-        $url = $this->base_url . $request_path;
-        $current_price_result = $this->authAPI($url, $request_path, 'GET', '');
-        $current_price = $current_price_result['result']->data->price;
+        $current_price = $this->currentPrice();
 
         // get margin account
         $margin_path = "/api/v1/margin/account";
@@ -172,6 +166,21 @@ class HomeController extends Controller
         $data['usdt_liability'] = $usdt_liability;
         
         return $data;
+    }
+
+    /**
+     * Get Current Price
+     */
+    public function currentPrice()
+    {
+        // get current price
+        $current_price = 0;
+        $symbol = 'THETA-USDT';
+        $request_path = "/api/v1/market/orderbook/level1?symbol={$symbol}";
+        $url = $this->base_url . $request_path;
+        $current_price_result = $this->authAPI($url, $request_path, 'GET', '');
+        $current_price = $current_price_result['result']->data->price;
+        return $current_price;
     }
 
     /**
@@ -216,5 +225,19 @@ class HomeController extends Controller
     {
         $request->session()->flush();
         return redirect('/');
+    }
+
+    /**
+     * getCurrentPrice
+     */
+    public function getCurrentPrice(Request $request)
+    {
+        $session = $request->session()->get('accId');
+        if ($session !== null) {
+            $current_price = $this->currentPrice();
+            return $current_price;
+        } else{
+            return "0.00";
+        }
     }
 }
