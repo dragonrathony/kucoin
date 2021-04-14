@@ -18,3 +18,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('home/auth', [HomeController::class, 'auth'])->name('home.auth');
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::get('/home/getCurrentPrice', [HomeController::class, 'getCurrentPrice'])->name('home.getCurrentPrice');
+Route::post('/home/getAvailableTransferAmount', [HomeController::class, 'getAvailableTransferAmount'])->name('home.getAvailableTransferAmount');
+Route::post('home/transfer', [HomeController::class, 'transfer'])->name('home.transfer');

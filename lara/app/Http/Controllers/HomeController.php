@@ -77,13 +77,17 @@ class HomeController extends Controller
     }
 
     // Call KuCoin API
-    public function callAPI($url, $request_path, $method, $body)
+    public function callAPI($request, $url, $request_path, $method, $body)
     {
+        
         $body = is_array($body) ? json_encode($body) : $body; // Body must be in json format
         $timestamp = time() * 1000;
         $what = $timestamp . $method . $request_path . $body;
-        $kc_api_sign = base64_encode(hash_hmac("sha256", $what, $this->secret, true));
-        $updated_passphrase = base64_encode(hash_hmac("sha256", $this->passphrase, $this->secret, true)); // For the V2
+        $secret = $request->session()->get('secret');
+        $passphrase = $request->session()->get('pw');
+        $key = $request->session()->get('apiKey');
+        $kc_api_sign = base64_encode(hash_hmac("sha256", $what, $secret, true));
+        $updated_passphrase = base64_encode(hash_hmac("sha256", $passphrase, $secret, true)); // For the V2
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -96,7 +100,7 @@ class HomeController extends Controller
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json',
-                'KC-API-KEY:' . $this->key,
+                'KC-API-KEY:' . $key,
                 'KC-API-SIGN:' . $kc_api_sign,
                 'KC-API-TIMESTAMP:' . $timestamp,
                 'KC-API-PASSPHRASE:' . $updated_passphrase,
@@ -107,7 +111,7 @@ class HomeController extends Controller
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
-
+        
         if ($err) {
             return ['error' => 1, 'result' => json_decode($err)];
         } else {
@@ -209,12 +213,9 @@ class HomeController extends Controller
                 $request->session()->forget('values');
             }
             $request->session()->put('values', $values);
-            return back();
+            return back()->with('authSuccess','Authentication Success');;
         } else {
-            return response()->json([
-                'status' => 'error',
-                'data' => 'Authentication failed'
-            ]);
+            return redirect('/')->with('authError','Authentication Failed');
         }
     }
 
@@ -239,5 +240,48 @@ class HomeController extends Controller
         } else{
             return "0.00";
         }
+    }
+
+    /**
+     * getAvailableTransferAmount
+     */
+    public function getAvailableTransferAmount(Request $request)
+    {
+        $session = $request->session()->get('accId');
+        if ($session !== null) {
+            if ($request->ajax()) {
+                $currency = $request->data['currency'];
+                $type = $request->data['type'];
+                $request_path = "/api/v1/accounts/transferable?currency=".$currency."&type=".$type;
+                $result = $this->callAPI($request, $this->base_url . $request_path, $request_path, 'GET', '');
+                if (isset( $result['result']->data)) {
+                    return ['status' => true, 'result' => $result['result']->data->transferable];
+                } else {
+                    return ['status' => false, 'result' => $result['result']->msg];
+                }
+            }
+        } else{
+            return ['status' => false, 'result' => "0"];
+        }
+    }
+
+    /**
+     * Transfer
+     */
+    public function transfer(Request $request)
+    {
+        $body = [
+            'clientOid' => $request->session()->get('accId'),
+            'currency' => $request->all()['coin'],
+            'from' => $request->all()['from_account'],
+            'to' => $request->all()['to_account'],
+            'amount' => $request->all()['transfer_amount'],
+        ];
+        $request_path = "/api/v2/accounts/inner-transfer";
+        $result = $this->callAPI($request, $this->base_url . $request_path, $request_path, 'POST', $body);
+        
+        dd($result);
+
+        // return redirect('/');
     }
 }

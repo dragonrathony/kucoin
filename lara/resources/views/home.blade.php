@@ -262,7 +262,6 @@
             @else
             @endif
 
-
             <!-- Trading -->
             <div class="card my-4">
                 <h5 class="card-header text-center">Trading</h5>
@@ -481,9 +480,9 @@
                                     <a class="nav-link active sub-nav-link"
                                         id="margin-limit-tab"
                                         data-toggle="tab"
-                                        href="#margin-slimit-tabs"
+                                        href="#margin-limit-tabs"
                                         role="tab"
-                                        aria-controls="margin-slimit-tabs"
+                                        aria-controls="margin-limit-tabs"
                                         aria-selected="true">Limit</a>
                                 </li>
                                 <li class="nav-item"
@@ -702,63 +701,76 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <form>
+                        <form method="POST"
+                            action="{{ url('home/transfer') }}">
+                            @csrf
+                            <div class="modal-body">
                                 <div class="form-group">
                                     <label>Direction</label>
                                     <div class="d-flex">
                                         <select class="form-control"
-                                            id="direction1">
-                                            <option>1</option>
-                                            <option>2</option>
+                                            id="from_account"
+                                            name="from_account"
+                                            required>
+                                            <option value="MAIN">Main Account</option>
+                                            <option value="TRADE">Trading Account</option>
+                                            <option value="MARGIN">Margin Account</option>
                                         </select>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             width="16"
                                             height="16"
                                             fill="currentColor"
-                                            class="bi bi-arrow-left-right w-25 mt-2"
+                                            class="bi bi-arrow-right w-25 mt-auto m-auto"
                                             viewBox="0 0 16 16">
                                             <path fill-rule="evenodd"
-                                                d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z" />
+                                                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                                         </svg>
                                         <select class="form-control"
-                                            id="direction2">
-                                            <option>1</option>
-                                            <option>2</option>
+                                            id="to_account"
+                                            name="to_account"
+                                            required>
+                                            <option value="MAIN">Main Account</option>
+                                            <option value="TRADE">Trading Account</option>
+                                            <option value="MARGIN">Margin Account</option>
+                                            <option value="FUTURES">Futures Account</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="coin">Coin</label>
                                     <select class="form-control"
-                                        id="coin">
-                                        <option>1</option>
-                                        <option>2</option>
+                                        id="coin"
+                                        name="coin">
+                                        <option value="TETHER">TETHER</option>
+                                        <option value="THETA">THETA</option>
                                     </select>
                                 </div>
+                                <p id="error_msg"
+                                    class="text-danger text-center"></p>
                                 <div class="form-group">
                                     <div class="row pl-3 pr-3">
                                         <label>Amount</label>
-                                        <label class="ml-auto">Available Amount: <span
-                                                class="text-primary">0<span></label>
+                                        <label class="ml-auto">Available Amount: <span class="text-primary"
+                                                id="transfer_available">0<span></label>
                                     </div>
                                     <div class="input-group">
                                         <input type="number"
                                             class="form-control"
-                                            id="transfer-amount"
+                                            id="transfer_amount"
+                                            name="transfer_amount"
                                             required>
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"
-                                                id="transfer-amount-prepend">USDT</span>
+                                                id="transfer_amount_prepend">USDT</span>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit"
-                                class="btn btn-success w-100">Confirm</button>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit"
+                                    class="btn btn-success w-100">Confirm</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
