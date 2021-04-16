@@ -793,118 +793,142 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <form class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="daily-rate">Max Daily Interest Rate (No limit if left
-                                            empty)</label>
-                                        <div class="input-group">
-                                            <input type="number"
-                                                class="form-control"
-                                                id="daily-rate"
-                                                placeholder="Daily Interest Rate: 0% ~ 2%"
-                                                required>
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"
-                                                    id="daily-rate-prepend">%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row pl-3 pr-3">
-                                            <label>Amount</label>
-                                            <label class="ml-auto">Available Amount: <span
-                                                    class="text-primary">0<span></label>
-                                        </div>
-                                        <div class="input-group">
-                                            <input type="number"
-                                                class="form-control"
-                                                id="borrow-amount"
-                                                required>
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"
-                                                    id="borrow-amount-prepend">USDT</span>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-2">
-                                            <div class="col-lg-3 pr-0">
-                                                <button type="button"
-                                                    class="btn btn-light w-100">25%</button>
-                                            </div>
-                                            <div class="col-lg-3 pr-0">
-                                                <button type="button"
-                                                    class="btn btn-light w-100">50%</button>
-                                            </div>
-                                            <div class="col-lg-3 pr-0">
-                                                <button type="button"
-                                                    class="btn btn-light w-100">75%</button>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <button type="button"
-                                                    class="btn btn-light w-100">100%</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="terms">Terms</label>
-                                        <div class="input-group">
-                                            <div class="form-check col-lg-4">
-                                                <input class="form-check-input"
-                                                    type="radio"
-                                                    name="term-radio"
-                                                    id="term-7"
-                                                    value="7">
-                                                <label class="form-check-label"
-                                                    for="term-7">
-                                                    7 Days
-                                                </label>
-                                            </div>
-                                            <div class="form-check col-lg-4">
-                                                <input class="form-check-input"
-                                                    type="radio"
-                                                    name="term-radio"
-                                                    id="term-14"
-                                                    value="14">
-                                                <label class="form-check-label"
-                                                    for="term-14">
-                                                    14 Days
-                                                </label>
-                                            </div>
-                                            <div class="form-check col-lg-4">
-                                                <input class="form-check-input"
-                                                    type="radio"
-                                                    name="term-radio"
-                                                    id="term-28"
-                                                    value="28">
-                                                <label class="form-check-label"
-                                                    for="term-28">
-                                                    28 Days
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <form method="POST"
+                            action="{{ url('home/transfer') }}">
+                            @csrf
+                            <div class="modal-body">
 
-                                </form>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="target-rate">Target(%)</label>
-                                        <div class='d-flex'>
-                                            <input type="number"
-                                                class="form-control"
-                                                id="target-rate"
-                                                required>
-                                            <button type="button"
-                                                class="btn btn-secondary ml-4">Calculate</button>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="daily-rate">Max Daily Interest Rate (No limit if left
+                                                empty)</label>
+                                            <div class="input-group">
+                                                <input type="number"
+                                                    class="form-control"
+                                                    id="daily-rate"
+                                                    step="any"
+                                                    placeholder="Daily Interest Rate: 0% ~ 2%"
+                                                    required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"
+                                                        id="daily-rate-prepend">%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row pl-3 pr-3">
+                                                <label>Amount</label>
+                                                <label class="ml-auto">Available Amount: <span
+                                                        class="text-primary">0<span></label>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="number"
+                                                    class="form-control"
+                                                    id="borrow-amount"
+                                                    step="any"
+                                                    required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"
+                                                        id="borrow-amount-prepend">USDT</span>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-lg-3 pr-0">
+                                                    <button type="button"
+                                                        class="btn btn-light w-100">25%</button>
+                                                </div>
+                                                <div class="col-lg-3 pr-0">
+                                                    <button type="button"
+                                                        class="btn btn-light w-100">50%</button>
+                                                </div>
+                                                <div class="col-lg-3 pr-0">
+                                                    <button type="button"
+                                                        class="btn btn-light w-100">75%</button>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <button type="button"
+                                                        class="btn btn-light w-100">100%</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="terms">Terms</label>
+                                            <div class="input-group">
+                                                <div class="form-check col-lg-4">
+                                                    <input class="form-check-input"
+                                                        type="checkbox"
+                                                        name="term-7"
+                                                        id="term-7"
+                                                        value="7">
+                                                    <label class="form-check-label"
+                                                        for="term-7">
+                                                        7 Days
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col-lg-4">
+                                                    <input class="form-check-input"
+                                                        type="checkbox"
+                                                        name="term-14"
+                                                        id="term-14"
+                                                        value="14">
+                                                    <label class="form-check-label"
+                                                        for="term-14">
+                                                        14 Days
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col-lg-4">
+                                                    <input class="form-check-input"
+                                                        type="checkbox"
+                                                        name="term-28"
+                                                        id="term-28"
+                                                        value="28">
+                                                    <label class="form-check-label"
+                                                        for="term-28">
+                                                        28 Days
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="target-rate">Target(%)</label>
+                                            <div class='d-flex'>
+                                                <input type="number"
+                                                    class="form-control"
+                                                    id="target-rate">
+                                                <button type="button"
+                                                    class="btn btn-secondary ml-4"
+                                                    id="calc_target_btn">Calculate</button>
+                                            </div>
+                                        </div>
+                                        <div id="seed_borrow_div">
+                                            <!-- <div class='w-50 ml-auto mr-auto'>
+                                                <div class="d-flex">
+                                                    <div>SEED amount</div>
+                                                    <div class="ml-auto">
+                                                        <span class="currency">$</span>
+                                                        <span id="seed_amt"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div>BORROW amount</div>
+                                                    <div class="ml-auto">
+                                                        <span class="currency">$</span>
+                                                        <span id="borrow_amt"></span>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit"
-                                class="btn btn-success w-100">Borrow USDT</button>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="submit"
+                                    class="btn btn-success w-100">Borrow USDT</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

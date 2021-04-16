@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -79,10 +80,10 @@ class HomeController extends Controller
     // Call KuCoin API
     public function callAPI($request, $url, $request_path, $method, $body)
     {
-        
         $body = is_array($body) ? json_encode($body) : $body; // Body must be in json format
-        $timestamp = time() * 1000;
+        $timestamp = round(microtime(true) * 1000);
         $what = $timestamp . $method . $request_path . $body;
+
         $secret = $request->session()->get('secret');
         $passphrase = $request->session()->get('pw');
         $key = $request->session()->get('apiKey');
@@ -93,7 +94,7 @@ class HomeController extends Controller
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
+            CURLOPT_ENCODING => "utf-8",
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 120,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -107,7 +108,6 @@ class HomeController extends Controller
                 'KC-API-KEY-VERSION: 2'
             )
         ));
-
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
@@ -270,18 +270,17 @@ class HomeController extends Controller
      */
     public function transfer(Request $request)
     {
-        $body = [
-            'clientOid' => $request->session()->get('accId'),
+        $params = array(
+            'clientOid' => (string) Str::uuid(),
             'currency' => $request->all()['coin'],
             'from' => $request->all()['from_account'],
             'to' => $request->all()['to_account'],
-            'amount' => $request->all()['transfer_amount'],
-        ];
-        $request_path = "/api/v2/accounts/inner-transfer";
-        $result = $this->callAPI($request, $this->base_url . $request_path, $request_path, 'POST', $body);
-        
+            'amount' => $request->all()['transfer_amount']
+        );
+        $request_path = "/api/v2/accounts/inner-transfer";        
+        $result = $this->callAPI($request, $this->base_url . $request_path, $request_path, 'POST', $params);
         dd($result);
-
+        
         // return redirect('/');
     }
 }

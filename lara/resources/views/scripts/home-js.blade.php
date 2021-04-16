@@ -51,6 +51,30 @@ $("#coin").change(function() {
     getAvailableTransferAmount($(this).val(), $("#from_account").val())
 });
 
+$('#calc_target_btn').click(function() {
+    var target = Number($('#target-rate').val());
+    var seed_amt = 1500 * ((100 - target) / 100);
+    var borrow_amt = 1500 * (target / 100);
+    console.log("aaa: ", seed_amt, borrow_amt);
+    var html = `<div class='w-50 ml-auto mr-auto'>
+                    <div class="d-flex">
+                        <div>SEED amount</div>
+                        <div class="ml-auto">
+                            <span class="currency">$</span>
+                            <span id="seed_amt">` + seed_amt + `</span>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div>BORROW amount</div>
+                        <div class="ml-auto">
+                            <span class="currency">$</span>
+                            <span id="borrow_amt">` + borrow_amt + `</span>
+                        </div>
+                    </div>
+                </div>`;
+    $('#seed_borrow_div').html(html);
+});
+
 @if(Session::has('authError'))
 toastr.options = {
     "closeButton": true,
